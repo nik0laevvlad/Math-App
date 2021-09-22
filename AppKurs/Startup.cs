@@ -1,6 +1,7 @@
 using AppKurs.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -41,6 +42,12 @@ namespace AppKurs
                 {
                     options.ClientId = "1009479771010-nn0d973skcheanf3g27b5a079jh1js6s.apps.googleusercontent.com";
                     options.ClientSecret = "fD2-UVmneCCrJ83rjQJOtT9-";
+                })
+                .AddVkontakte(options =>
+                {
+                    options.ClientId = "7958304";
+                    options.ClientSecret = "Avj06MS6G6eeel9MNRaN";
+                    options.CallbackPath = new PathString("/signin-vk");
                 });
         }
 
