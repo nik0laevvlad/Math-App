@@ -12,5 +12,14 @@ namespace AppKurs.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<ApplicationUser>()
+                .Property(e => e.customUserName)
+                .HasMaxLength(50);
+        }
     }
 }
