@@ -1,0 +1,27 @@
+﻿@model UserTask
+
+@{
+    ViewData["Title"] = "Create Task";
+}
+
+<div class="col-md-7">
+    <form method="post">
+        <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" asp-for="TaskTitle" />
+        </div>
+        <div class="form-group">
+            <label>Topic</label>
+            <input class="form-control" asp-for="TaskTopic" />
+        </div>
+        <div class="form-group">
+            <label>Text</label>
+            <textarea type="text" class="form-control" asp-for="TaskText"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Answer</label>
+            <input class="form-control" asp-for="TaskAnswer"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
