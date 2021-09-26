@@ -9,7 +9,7 @@
 </div>
 @foreach (var userTask in Model)
 {
-    <div class="col-md-5 card bg-light mt-lg-3 p-5 rounded">
+    <div class="col-md-5 card bg-light mt-3 p-5 rounded">
         <h1>@userTask.TaskTitle</h1>
         <p class="lead">@userTask.TaskTopic</p>
         <a class="btn btn-lg btn-primary" asp-controller="UserTask" asp-action="Details" asp-route-id="@userTask.Id">View more...</a>
