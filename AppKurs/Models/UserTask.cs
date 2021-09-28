@@ -1,4 +1,6 @@
-﻿namespace AppKurs.Models
+﻿using System.Collections.Generic;
+
+namespace AppKurs.Models
 {
     public class UserTask
     {
@@ -8,5 +10,8 @@
         public string TaskTopic { get; set; }
         public string TaskAnswer { get; set; }
         public string TaskUser { get; set; }
+        public int TaskRating { get; set; }
+
+        public ICollection<SolvedTask> SolvedTasks { get; set; }
     }
 }

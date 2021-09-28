@@ -22,6 +22,20 @@ namespace AppKurs.Data
             builder.Entity<ApplicationUser>()
                 .Property(e => e.customUserName)
                 .HasMaxLength(50);
+
+
+            builder.Entity<SolvedTask>()
+                .HasKey(nameof(SolvedTask.UserId), nameof(SolvedTask.TaskId));
+
+            builder.Entity<SolvedTask>()
+                .HasOne(pt => pt.Task)
+                .WithMany(p => p.SolvedTasks)
+                .HasForeignKey(pt => pt.TaskId);
+
+            builder.Entity<SolvedTask>()
+                .HasOne(pt => pt.User)
+                .WithMany(p => p.SolvedTasks)
+                .HasForeignKey(pt => pt.UserId);
         }
     }
 }
