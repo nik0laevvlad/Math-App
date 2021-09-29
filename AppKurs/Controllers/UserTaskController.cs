@@ -44,12 +44,12 @@ namespace AppKurs.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            var userName = await _db.ApplicationUsers
+            var currentUser = await _db.ApplicationUsers
                 .FirstOrDefaultAsync(m => m.UserName == User.Identity.Name);
             SolvedTask sTask = new SolvedTask
             {
                 TaskId = (int)id,
-                UserId = userName.Id,
+                UserId = currentUser.Id,
                 Solved = false
             };
 
@@ -61,7 +61,12 @@ namespace AppKurs.Controllers
             var usertask = await _db.UserTasks
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (sTask.UserId.Contains(User.Identity.Name) || sTask.TaskId.Equals(id))
+            var solved = await _db.SolvedTasks
+                .FirstOrDefaultAsync(t =>
+                    t.UserId == currentUser.Id &&
+                    t.TaskId == id);
+
+            if (solved != null)
             {
                 return View(usertask);
             }
