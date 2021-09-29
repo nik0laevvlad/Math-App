@@ -10,6 +10,8 @@ namespace AppKurs.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<UserTask> UserTasks { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<SolvedTask> SolvedTasks { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
