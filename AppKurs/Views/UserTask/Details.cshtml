@@ -23,7 +23,7 @@
     </button>
 </form>
 <div class="col-md">
-    Author: <b>@Model.TaskUser</b>
+    Author: <a asp-controller="Home" asp-action="UserPage" asp-route-username="@Model.TaskUser"><b>@Model.TaskUser</b></a>
 </div>
 
 

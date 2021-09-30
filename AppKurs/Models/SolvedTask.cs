@@ -11,6 +11,7 @@ namespace AppKurs.Models
         public string UserId { get; set; }
         public int TaskId { get; set; }
         public bool Solved { get; set; }
+        public string UserAnswer { get; set; }
 
         public ApplicationUser User { get; set; }
         public UserTask Task { get; set; }
