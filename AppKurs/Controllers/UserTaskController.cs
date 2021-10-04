@@ -95,12 +95,18 @@ namespace AppKurs.Controllers
                 .FirstOrDefaultAsync(t =>
                     t.UserId == currentUser.Id &&
                     t.TaskId == id);
+            var thisAnswer = await _db.UserTasks
+                .FirstOrDefaultAsync(t => t.Id == id);
 
             thisTask.UserAnswer = model.UserAnswer;
             _db.SolvedTasks.Update(thisTask);
+            if(thisTask.UserAnswer == thisAnswer.TaskAnswer)
+            {
+                thisTask.Solved = true;
+            }
             _db.SaveChanges();
 
-            return View(new SolvedViewModel { SolvedTasks = model, UserTasks = userTask });
+            return RedirectToAction("Details");
         }
     }
 }

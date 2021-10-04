@@ -17,22 +17,10 @@
         <label for="answer" class="form-label">Your answer</label>
         <input name="UserAnswer" type="text" class="form-control" id="answer">
     </div>
-    <!-- Button trigger modal -->
     <button type="submit" class="btn btn-primary">
         Answer
     </button>
 </form>
-<div class="col-md">
+<div class="col-md mt-3">
     Author: <a asp-controller="Home" asp-action="UserPage" asp-route-username="@Model.UserTasks.TaskUser"><b>@Model.UserTasks.TaskUser</b></a>
 </div>
-
-<!--
-<!--Right answer
-<div class="alert alert-success" role="alert">
-    Right answer
-</div>
-
-<!--Wrong answer
-<div class="alert alert-danger" role="alert">
-    Wrong answer
-</div> -->
