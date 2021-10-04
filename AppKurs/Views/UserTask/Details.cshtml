@@ -1,38 +1,38 @@
 ﻿@using AppKurs.Models
-@model UserTask
+@model SolvedViewModel
 @{
-    ViewData["Title"] = @Model.TaskTitle;
+    ViewData["Title"] = @Model.UserTasks.TaskTitle;
 }
 
 
 <div class="col-md text-center">
-    <h1 class="">@Model.TaskTitle</h1>
+    <h1 class="">@Model.UserTasks.TaskTitle</h1>
 </div>
 <div class="col-md">
-    <h3>@Model.TaskTopic</h3>
-    <p class="lead">@Model.TaskText</p>
+    <h3>@Model.UserTasks.TaskTopic</h3>
+    <p class="lead">@Model.UserTasks.TaskText</p>
 </div>
-<form class="col-md-5">
+<form method="post" class="col-md-5">
     <div class="mb-3">
         <label for="answer" class="form-label">Your answer</label>
-        <input type="text" class="form-control" id="answer">
+        <input name="UserAnswer" type="text" class="form-control" id="answer">
     </div>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="submit" class="btn btn-primary">
         Answer
     </button>
 </form>
 <div class="col-md">
-    Author: <a asp-controller="Home" asp-action="UserPage" asp-route-username="@Model.TaskUser"><b>@Model.TaskUser</b></a>
+    Author: <a asp-controller="Home" asp-action="UserPage" asp-route-username="@Model.UserTasks.TaskUser"><b>@Model.UserTasks.TaskUser</b></a>
 </div>
 
-
-<!--Right answer-->
+<!--
+<!--Right answer
 <div class="alert alert-success" role="alert">
     Right answer
 </div>
 
-<!--Wrong answer-->
+<!--Wrong answer
 <div class="alert alert-danger" role="alert">
     Wrong answer
-</div>
+</div> -->

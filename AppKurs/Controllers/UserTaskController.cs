@@ -42,6 +42,7 @@ namespace AppKurs.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             var currentUser = await _db.ApplicationUsers
@@ -50,7 +51,7 @@ namespace AppKurs.Controllers
             {
                 TaskId = (int)id,
                 UserId = currentUser.Id,
-                Solved = false
+                Solved = false,
             };
 
             if (id == null)
@@ -68,7 +69,7 @@ namespace AppKurs.Controllers
 
             if (solved != null)
             {
-                return View(usertask);
+                return View(new SolvedViewModel { UserTasks = usertask, SolvedTasks = sTask });
             }
             else
             {
@@ -80,8 +81,26 @@ namespace AppKurs.Controllers
             {
                 return NotFound();
             }
+            
 
-            return View(usertask);
+            return View(new SolvedViewModel { UserTasks = usertask, SolvedTasks = sTask });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DetailsAsync(int? id, [FromForm] SolvedTask model, UserTask userTask)
+        {
+            var currentUser = await _db.ApplicationUsers
+                .FirstOrDefaultAsync(m => m.UserName == User.Identity.Name);
+            var thisTask = await _db.SolvedTasks
+                .FirstOrDefaultAsync(t =>
+                    t.UserId == currentUser.Id &&
+                    t.TaskId == id);
+
+            thisTask.UserAnswer = model.UserAnswer;
+            _db.SolvedTasks.Update(thisTask);
+            _db.SaveChanges();
+
+            return View(new SolvedViewModel { SolvedTasks = model, UserTasks = userTask });
         }
     }
 }
