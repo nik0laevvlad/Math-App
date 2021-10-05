@@ -1,4 +1,5 @@
 ﻿@using AppKurs.Models
+@using AppKurs.Data
 @model SolvedViewModel
 @{
     ViewData["Title"] = @Model.UserTasks.TaskTitle;
@@ -24,3 +25,16 @@
 <div class="col-md mt-3">
     Author: <a asp-controller="Home" asp-action="UserPage" asp-route-username="@Model.UserTasks.TaskUser"><b>@Model.UserTasks.TaskUser</b></a>
 </div>
+
+@if (Model.SolvedTasks.Solved == true)
+            {
+                <div>
+                    задача решена
+                </div>
+            }
+            else
+            {
+                <div>
+                    задача не решена
+                </div>
+            }

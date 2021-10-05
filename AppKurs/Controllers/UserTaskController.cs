@@ -69,7 +69,7 @@ namespace AppKurs.Controllers
 
             if (solved != null)
             {
-                return View(new SolvedViewModel { UserTasks = usertask, SolvedTasks = sTask });
+                return View(new SolvedViewModel { UserTasks = usertask, SolvedTasks = solved });
             }
             else
             {
@@ -87,7 +87,7 @@ namespace AppKurs.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DetailsAsync(int? id, [FromForm] SolvedTask model, UserTask userTask)
+        public async Task<IActionResult> DetailsAsync(int? id, [FromForm] SolvedTask model)
         {
             var currentUser = await _db.ApplicationUsers
                 .FirstOrDefaultAsync(m => m.UserName == User.Identity.Name);
@@ -100,10 +100,7 @@ namespace AppKurs.Controllers
 
             thisTask.UserAnswer = model.UserAnswer;
             _db.SolvedTasks.Update(thisTask);
-            if(thisTask.UserAnswer == thisAnswer.TaskAnswer)
-            {
-                thisTask.Solved = true;
-            }
+            if(thisTask.UserAnswer == thisAnswer.TaskAnswer) thisTask.Solved = true;
             _db.SaveChanges();
 
             return RedirectToAction("Details");
