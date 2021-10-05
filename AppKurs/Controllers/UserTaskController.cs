@@ -62,19 +62,20 @@ namespace AppKurs.Controllers
             var usertask = await _db.UserTasks
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            var solved = await _db.SolvedTasks
+            var currentTask = await _db.SolvedTasks
                 .FirstOrDefaultAsync(t =>
                     t.UserId == currentUser.Id &&
                     t.TaskId == id);
 
-            if (solved != null)
+            if (currentTask != null)
             {
-                return View(new SolvedViewModel { UserTasks = usertask, SolvedTasks = solved });
+                return View(new SolvedViewModel { UserTasks = usertask, SolvedTasks = currentTask });
             }
             else
             {
                 _db.SolvedTasks.Add(sTask);
                 _db.SaveChanges();
+                
             }
 
             if (usertask == null)
@@ -91,16 +92,16 @@ namespace AppKurs.Controllers
         {
             var currentUser = await _db.ApplicationUsers
                 .FirstOrDefaultAsync(m => m.UserName == User.Identity.Name);
-            var thisTask = await _db.SolvedTasks
+            var currentTask = await _db.SolvedTasks
                 .FirstOrDefaultAsync(t =>
                     t.UserId == currentUser.Id &&
                     t.TaskId == id);
             var thisAnswer = await _db.UserTasks
                 .FirstOrDefaultAsync(t => t.Id == id);
 
-            thisTask.UserAnswer = model.UserAnswer;
-            _db.SolvedTasks.Update(thisTask);
-            if(thisTask.UserAnswer == thisAnswer.TaskAnswer) thisTask.Solved = true;
+            currentTask.UserAnswer = model.UserAnswer;
+            _db.SolvedTasks.Update(currentTask);
+            if(currentTask.UserAnswer == thisAnswer.TaskAnswer) currentTask.Solved = true;
             _db.SaveChanges();
 
             return RedirectToAction("Details");
