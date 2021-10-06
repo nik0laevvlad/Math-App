@@ -47,6 +47,14 @@ namespace AppKurs.Controllers
         {
             var currentUser = await _db.ApplicationUsers
                 .FirstOrDefaultAsync(m => m.UserName == User.Identity.Name);
+            var usertask = await _db.UserTasks
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (currentUser == null)
+            {
+                return View(new SolvedViewModel { UserTasks = usertask });
+            }
+
             SolvedTask sTask = new SolvedTask
             {
                 TaskId = (int)id,
@@ -58,9 +66,6 @@ namespace AppKurs.Controllers
             {
                 return NotFound();
             }
-
-            var usertask = await _db.UserTasks
-                .FirstOrDefaultAsync(m => m.Id == id);
 
             var currentTask = await _db.SolvedTasks
                 .FirstOrDefaultAsync(t =>
@@ -75,7 +80,6 @@ namespace AppKurs.Controllers
             {
                 _db.SolvedTasks.Add(sTask);
                 _db.SaveChanges();
-                
             }
 
             if (usertask == null)
@@ -83,7 +87,6 @@ namespace AppKurs.Controllers
                 return NotFound();
             }
             
-
             return View(new SolvedViewModel { UserTasks = usertask, SolvedTasks = sTask });
         }
 

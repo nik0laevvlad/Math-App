@@ -13,28 +13,26 @@
     <h3>@Model.UserTasks.TaskTopic</h3>
     <p class="lead">@Model.UserTasks.TaskText</p>
 </div>
-<form method="post" class="col-md-5">
-    <div class="mb-3">
-        <label for="answer" class="form-label">Your answer</label>
-        <input name="UserAnswer" type="text" class="form-control" id="answer">
+
+@if (User.Identity.IsAuthenticated && !(Model.SolvedTasks.Solved))
+{
+    <form method="post" class="col-md-5">
+        <div class="mb-3">
+            <label for="answer" class="form-label">Your answer</label>
+            <input name="UserAnswer" type="text" class="form-control" id="answer">
+        </div>
+        <button type="submit" class="btn btn-primary">
+            Answer
+        </button>
+    </form>
+}
+
+@if (User.Identity.IsAuthenticated && Model.SolvedTasks.Solved)
+{
+    <div class="col-md card bg-success">
+        <h2 class="text-light text-center">Задача решена</h2>
     </div>
-    <button type="submit" class="btn btn-primary">
-        Answer
-    </button>
-</form>
+}
 <div class="col-md mt-3">
     Author: <a asp-controller="Home" asp-action="UserPage" asp-route-username="@Model.UserTasks.TaskUser"><b>@Model.UserTasks.TaskUser</b></a>
 </div>
-
-@if (Model.SolvedTasks.Solved == true)
-            {
-                <div>
-                    задача решена
-                </div>
-            }
-            else
-            {
-                <div>
-                    задача не решена
-                </div>
-            }
