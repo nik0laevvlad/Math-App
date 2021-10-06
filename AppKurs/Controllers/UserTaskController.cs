@@ -39,7 +39,8 @@ namespace AppKurs.Controllers
 
             _db.UserTasks.Add(uTask);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return Redirect("/Home/Index");
         }
 
         [HttpGet]

@@ -22,10 +22,7 @@ namespace AppKurs.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View(_db.UserTasks.ToList());
 
         public IActionResult Privacy()
         {

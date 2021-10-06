@@ -1,13 +1,26 @@
-﻿@{
+﻿@model IEnumerable<AppKurs.Models.UserTask>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-<div class="text-center">
-    <a class="btn btn-success" asp-controller="UserTask" asp-action="Create">Add Task</a>
-    <a class="btn btn-primary" asp-controller="UserTask" asp-action="Index">Task List</a>
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-center">
+        <a class="btn btn-success" asp-controller="UserTask" asp-action="Create">Add Task</a>
+    </div>
+}
 
+
+<div class="row">
+    @foreach (var userTask in Model)
+{
+    <div class="col-md-6">
+        <div class="card bg-light mt-3 p-5 rounded">
+            <h1>@userTask.TaskTitle</h1>
+            <p class="lead">@userTask.TaskTopic</p>
+            <a class="btn btn-lg btn-primary" asp-controller="UserTask" asp-action="Details" asp-route-id="@userTask.Id">View more...</a>
+        </div>
+    </div>
+}
+</div>

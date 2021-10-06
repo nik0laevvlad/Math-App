@@ -16,7 +16,7 @@
 
 @if (User.Identity.IsAuthenticated && !(Model.SolvedTasks.Solved))
 {
-    <form method="post" class="col-md-5">
+    <form method="post" class="col-md-6">
         <div class="mb-3">
             <label for="answer" class="form-label">Your answer</label>
             <input name="UserAnswer" type="text" class="form-control" id="answer">
