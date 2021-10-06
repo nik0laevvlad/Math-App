@@ -39,7 +39,7 @@ namespace AppKurs.Controllers
 
             _db.UserTasks.Add(uTask);
             _db.SaveChanges();
-            return View(model);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
