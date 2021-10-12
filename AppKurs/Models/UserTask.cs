@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppKurs.Models
 {
@@ -11,6 +14,14 @@ namespace AppKurs.Models
         public string TaskAnswer { get; set; }
         public string TaskUser { get; set; }
         public int TaskRating { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        public string ImageUrl { get; set; }
+
+        [NotMapped]
+        public virtual IFormFile ImageFile { get; set; }
+
+        public string ImageStorageName { get; set; }
 
         public ICollection<SolvedTask> SolvedTasks { get; set; }
     }

@@ -1,3 +1,4 @@
+using AppKurs.CloudStorage;
 using AppKurs.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,6 +51,7 @@ namespace AppKurs
                     options.ClientSecret = "Avj06MS6G6eeel9MNRaN";
                     options.CallbackPath = new PathString("/signin-vk");
                 });
+            services.AddSingleton<ICloudStorage, GoogleCloudStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

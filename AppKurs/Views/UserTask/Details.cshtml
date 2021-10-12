@@ -13,6 +13,10 @@
     <h3>@Model.UserTasks.TaskTopic</h3>
     <p class="lead">@Model.UserTasks.TaskText</p>
 </div>
+@if (Model.UserTasks.ImageUrl != null)
+{
+    <img src="@Url.Content(Model.UserTasks.ImageUrl)" alt="Image" />
+}
 
 @if (User.Identity.IsAuthenticated && !(Model.SolvedTasks.Solved))
 {
