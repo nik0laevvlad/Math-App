@@ -11,9 +11,12 @@
     </div>
 }
 
+@{ 
+    var reversedModel = Model.Reverse();
+}
 
 <div class="row">
-    @foreach (var userTask in Model)
+    @foreach (var userTask in reversedModel)
 {
     <div class="col-md-6">
         <div class="card bg-light mt-3 p-5 rounded">

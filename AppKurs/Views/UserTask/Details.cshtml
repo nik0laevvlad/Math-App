@@ -15,12 +15,12 @@
 </div>
 @if (Model.UserTasks.ImageUrl != null)
 {
-    <img src="@Url.Content(Model.UserTasks.ImageUrl)" alt="Image" />
+    <img src="@Url.Content(Model.UserTasks.ImageUrl)" class="col-md-12" alt="Image" />
 }
 
 @if (User.Identity.IsAuthenticated && !(Model.SolvedTasks.Solved))
 {
-    <form method="post" class="col-md-6">
+    <form method="post" class="col-md-6 mt-3">
         <div class="mb-3">
             <label for="answer" class="form-label">Your answer</label>
             <input name="UserAnswer" type="text" class="form-control" id="answer">
@@ -29,12 +29,18 @@
             Answer
         </button>
     </form>
+    @if (Model.SolvedTasks.UserAnswer != null)
+    {
+        <div class="col-md card bg-danger mt-3">
+            <h2 class="text-light text-center">Wrong Answer</h2>
+        </div>
+    }
 }
 
 @if (User.Identity.IsAuthenticated && Model.SolvedTasks.Solved)
 {
-    <div class="col-md card bg-success">
-        <h2 class="text-light text-center">Задача решена</h2>
+    <div class="col-md card bg-success mt-3">
+        <h2 class="text-light text-center">Task Solved</h2>
     </div>
 }
 <div class="col-md mt-3">

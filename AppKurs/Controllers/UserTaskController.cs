@@ -48,7 +48,7 @@ namespace AppKurs.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromForm] UserTask model, UserTask userTask)
+        public async Task<IActionResult> CreateAsync([FromForm] UserTask model)
         {
             UserTask uTask = new UserTask
             {
@@ -57,15 +57,15 @@ namespace AppKurs.Controllers
                 TaskAnswer = model.TaskAnswer,
                 TaskUser = User.Identity.Name,
                 TaskTopic = model.TaskTopic,
+                ImageFile = model.ImageFile
             };
             
-            if(userTask.ImageFile != null)
+            if(uTask.ImageFile != null)
             {
-                await UploadFile(userTask);
+                await UploadFile(uTask);
             }
 
             _db.UserTasks.Add(uTask);
-            _db.UserTasks.Add(userTask);
             _db.SaveChanges();
 
             return Redirect("/Home/Index");
