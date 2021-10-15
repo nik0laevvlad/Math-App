@@ -15,7 +15,7 @@
 </div>
 @if (Model.UserTasks.ImageUrl != null)
 {
-    <img src="@Url.Content(Model.UserTasks.ImageUrl)" class="col-md-12" alt="Image" />
+    <img src="@Url.Content(Model.UserTasks.ImageUrl)" class="img-fluid" alt="Image" />
 }
 
 @if (User.Identity.IsAuthenticated && !(Model.SolvedTasks.Solved))
