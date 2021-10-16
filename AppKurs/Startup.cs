@@ -42,13 +42,13 @@ namespace AppKurs
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    options.ClientId = "1009479771010-nn0d973skcheanf3g27b5a079jh1js6s.apps.googleusercontent.com";
-                    options.ClientSecret = "fD2-UVmneCCrJ83rjQJOtT9-";
+                    options.ClientId = Configuration.GetValue<string>("GoogleClientId");
+                    options.ClientSecret = Configuration.GetValue<string>("GoogleSecretKey");
                 })
                 .AddVkontakte(options =>
                 {
-                    options.ClientId = "7958304";
-                    options.ClientSecret = "Avj06MS6G6eeel9MNRaN";
+                    options.ClientId = Configuration.GetValue<string>("VKClientId");
+                    options.ClientSecret = Configuration.GetValue<string>("VKSecretKey");
                     options.CallbackPath = new PathString("/signin-vk");
                 });
             services.AddSingleton<ICloudStorage, GoogleCloudStorage>();
