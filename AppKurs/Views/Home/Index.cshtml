@@ -1,4 +1,6 @@
-﻿@model IEnumerable<AppKurs.Models.UserTask>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model IEnumerable<AppKurs.Models.UserTask>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -7,7 +9,7 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div class="text-center">
-        <a class="btn btn-success" asp-controller="UserTask" asp-action="Create">Add Task</a>
+        <a class="btn btn-success" asp-controller="UserTask" asp-action="Create">@Localizer["Add Task"]</a>
     </div>
 }
 
@@ -22,7 +24,7 @@
         <div class="card bg-light mt-3 p-5 rounded">
             <h1>@userTask.TaskTitle</h1>
             <p class="lead">@userTask.TaskTopic</p>
-            <a class="btn btn-lg btn-primary" asp-controller="UserTask" asp-action="Details" asp-route-id="@userTask.Id">View more...</a>
+            <a class="btn btn-lg btn-primary" asp-controller="UserTask" asp-action="Details" asp-route-id="@userTask.Id">@Localizer["View more"]</a>
         </div>
     </div>
 }

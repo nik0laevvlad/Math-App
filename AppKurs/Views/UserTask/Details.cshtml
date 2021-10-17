@@ -1,4 +1,6 @@
 ﻿@using AppKurs.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model SolvedViewModel
 @{
     ViewData["Title"] = @Model.UserTasks.TaskTitle;
@@ -21,34 +23,34 @@
 {
     <form method="post" class="col-md-6 mt-3">
         <div class="mb-3">
-            <label for="answer" class="form-label">Your answer</label>
+            <label for="answer" class="form-label">@Localizer["Your answer"]</label>
             <input name="UserAnswer" type="text" class="form-control" id="answer">
         </div>
         <button type="submit" class="btn btn-primary">
-            Answer
+            @Localizer["Answer"]
         </button>
     </form>
     @if (Model.SolvedTasks.UserAnswer != null)
     {
         <div class="col-md card bg-danger mt-3">
-            <h2 class="text-light text-center">Wrong Answer</h2>
+            <h2 class="text-light text-center">@Localizer["Wrong Answer"]</h2>
         </div>
     }
 }
 
-@if(User.Identity.Name == Model.UserTasks.TaskUser)
+@if (User.Identity.Name == Model.UserTasks.TaskUser)
 {
     <form asp-controller="UserTask" asp-action="DeleteConfirmed" asp-route-id="@Model.UserTasks.Id" method="post" class="col-md-6 mt-3">
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
     </form>
 }
 
 @if (User.Identity.IsAuthenticated && Model.SolvedTasks.Solved)
 {
     <div class="col-md card bg-success mt-3">
-        <h2 class="text-light text-center">Task Solved</h2>
+        <h2 class="text-light text-center">@Localizer["Task Solved"]</h2>
     </div>
 }
 <div class="col-md mt-3">
-    Author: <a asp-controller="Home" asp-action="UserPage" asp-route-username="@Model.UserTasks.TaskUser"><b>@Model.UserTasks.TaskUser</b></a>
+    @Localizer["Author"]: <a asp-controller="Home" asp-action="UserPage" asp-route-username="@Model.UserTasks.TaskUser"><b>@Model.UserTasks.TaskUser</b></a>
 </div>

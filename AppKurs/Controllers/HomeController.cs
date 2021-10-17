@@ -1,5 +1,7 @@
 ﻿using AppKurs.Data;
 using AppKurs.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -35,7 +37,7 @@ namespace AppKurs.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<IActionResult> UserPage(string? username)
+        public async Task<IActionResult> UserPage(string username)
         {
             if (username == null)
             {
@@ -50,6 +52,18 @@ namespace AppKurs.Controllers
             }
 
             return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult SetLanguage (string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+                );
+
+            return LocalRedirect(returnUrl);
         }
     }
 }

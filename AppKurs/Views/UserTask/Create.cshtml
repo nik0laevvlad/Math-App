@@ -1,4 +1,6 @@
-﻿@model UserTask
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model UserTask
+@inject IViewLocalizer Localizer
 
 @{
     ViewData["Title"] = "Create Task";
@@ -7,30 +9,30 @@
 <div class="col-md-7">
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label>Title</label>
+            <label>@Localizer["Title"]</label>
             <input class="form-control" asp-for="TaskTitle" />
         </div>
         <div class="form-group">
-            <label>Subject</label>
+            <label>@Localizer["Subject"]</label>
             <select class="form-control" asp-for="TaskTopic" aria-label="Default select example">
-                <option selected>Algebra</option>
-                <option value="Geometry">Geometry</option>
-                <option value="Programming">Programming</option>
+                <option selected>@Localizer["Algebra"]</option>
+                <option value="Geometry">@Localizer["Geometry"]</option>
+                <option value="Programming">@Localizer["Programming"]</option>
             </select>
         </div>
         <div class="form-group">
-            <label>Text</label>
+            <label>@Localizer["Text"]</label>
             <textarea type="text" class="form-control" asp-for="TaskText"></textarea>
         </div>
         <div class="form-group">
-            <label>Image File</label>
+            <label>@Localizer["Image File"]</label>
             <input asp-for="ImageFile" type="file" class="form-control" />
             <span asp-validation-for="ImageFile" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label>Answer</label>
+            <label>@Localizer["Answer"]</label>
             <input class="form-control" asp-for="TaskAnswer" />
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">@Localizer["Create"]</button>
     </form>
 </div>
