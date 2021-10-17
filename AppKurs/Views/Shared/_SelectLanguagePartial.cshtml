@@ -13,6 +13,6 @@
         .ToList();
 }
 
-<form asp-controller="Home" asp-action="SetLanguage" class="form-horizontal mt-2" asp-route-returnUrl="@Context.Request.Path" method="post">
-    @Localizer["Language"]: <select name="culture" onchange="this.form.submit();" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems"></select>
+<form asp-controller="Home" asp-action="SetLanguage" class="col-md-2 mt-2" asp-route-returnUrl="@Context.Request.Path" method="post">
+    @Localizer["Language"]: <select class="form-control" name="culture" onchange="this.form.submit();" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems"></select>
 </form>
