@@ -1,13 +1,10 @@
 ﻿using AppKurs.CloudStorage;
 using AppKurs.Data;
 using AppKurs.Models;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,12 +38,14 @@ namespace AppKurs.Controllers
 
         public IActionResult Index() => View(_db.UserTasks.ToList());
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromForm] UserTask model)
         {
@@ -137,6 +136,22 @@ namespace AppKurs.Controllers
             _db.SaveChanges();
 
             return RedirectToAction("Details");
+        }
+
+        [HttpPost, Route("UserTask/DeleteConfirmed")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var userTask = await _db.UserTasks.FindAsync(id);
+
+            if(userTask.ImageStorageName != null)
+            {
+                await _cloudStorage.DeleteFileAsync(userTask.ImageStorageName);
+            }
+
+            _db.UserTasks.Remove(userTask);
+            await _db.SaveChangesAsync();
+            return Redirect("/Home/Index");
         }
     }
 }
