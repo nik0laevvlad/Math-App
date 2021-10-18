@@ -1,0 +1,16 @@
+﻿@model IEnumerable<AppKurs.Models.UserTask>
+
+<div class="col">
+    <table class="table">
+        @foreach (var userTask in Model)
+        {
+            if (userTask.TaskUser == User.Identity.Name)
+            {
+                <tr>
+                    <td>@userTask.TaskTitle</td>
+                    <td>@userTask.TaskTopic</td>
+                </tr>
+            }
+        }
+    </table>
+</div>

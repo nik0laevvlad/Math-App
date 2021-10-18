@@ -1,20 +1,22 @@
-﻿@model IEnumerable<AppKurs.Data.ApplicationUser>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model IEnumerable<AppKurs.Data.ApplicationUser>
 
 @{
     ViewData["Title"] = "Users List";
 }
 
 <div class="col">
-    <h2>Список пользователей</h2>
+    <h2>@Localizer["Users List"]</h2>
     <table class="table">
         @foreach (var user in Model)
-    {
-        <tr>
-            <td>@user.UserName</td>
-            <td>
-                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Права доступа</a>
-            </td>
-        </tr>
-    }
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">@Localizer["Change role"]</a>
+                </td>
+            </tr>
+        }
     </table>
 </div>
