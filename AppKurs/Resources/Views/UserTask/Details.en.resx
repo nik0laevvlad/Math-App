@@ -126,6 +126,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="Task Solved" xml:space="preserve">
     <value>Task Solved</value>
   </data>

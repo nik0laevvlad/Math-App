@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model AppKurs.Models.UserTask
+
+@{
+    ViewData["Title"] = @Localizer["Edit"];
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label>@Localizer["Title"]</label>
+                <input asp-for="TaskTitle" class="form-control" />
+                <span asp-validation-for="TaskTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>@Localizer["Subject"]</label>
+                <select class="form-control" asp-for="TaskTopic" aria-label="Default select example">
+                    <option selected>@Localizer["Algebra"]</option>
+                    <option value="Geometry">@Localizer["Geometry"]</option>
+                    <option value="Programming">@Localizer["Programming"]</option>
+                </select>
+                <span asp-validation-for="TaskTopic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>@Localizer["Text"]</label>
+                <textarea asp-for="TaskText" class="form-control"></textarea>
+                <span asp-validation-for="TaskText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>@Localizer["Answer"]</label>
+                <input class="form-control" asp-for="TaskAnswer" />
+            </div>
+            <div class="form-group">
+                <input asp-for="ImageUrl" class="form-control" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label>@Localizer["Image"]</label>
+                <input asp-for="ImageFile" type="file" class="form-control">
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="ImageStorageName" class="form-control" type="hidden" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

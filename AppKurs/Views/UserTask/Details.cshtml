@@ -40,6 +40,7 @@
 
 @if (User.Identity.Name == Model.UserTasks.TaskUser || User.IsInRole("admin"))
 {
+    <a class="btn btn-success mt-3" asp-action="Edit" asp-route-id="@Model.UserTasks.Id">@Localizer["Edit"]</a>
     <form asp-controller="UserTask" asp-action="DeleteConfirmed" asp-route-id="@Model.UserTasks.Id" method="post" class="col-md-6 mt-3">
         <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
     </form>

@@ -153,5 +153,68 @@ namespace AppKurs.Controllers
             await _db.SaveChangesAsync();
             return Redirect("/Home/Index");
         }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var userTask = await _db.UserTasks.FindAsync(id);
+            if(userTask == null)
+            {
+                return NotFound();
+            }
+            return View(userTask);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit (int id, [Bind("Id,TaskTitle,TaskTopic,TaskText,ImageUrl,ImageFile,ImageStorageName")] UserTask userTask)
+        {
+            if(id != userTask.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if(userTask.ImageFile != null)
+                    {
+                        if(userTask.ImageStorageName != null)
+                        {
+                            await _cloudStorage.DeleteFileAsync(userTask.ImageStorageName);
+                        }
+
+                        await UploadFile(userTask);
+                    }
+
+                    userTask.TaskUser = userTask.TaskUser;
+                    _db.Update(userTask);
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserTaskExists(userTask.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(userTask);
+        }
+
+        private bool UserTaskExists(int id)
+        {
+            return _db.UserTasks.Any(e => e.Id == id);
+        }
     }
 }

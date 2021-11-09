@@ -117,25 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Algebra" xml:space="preserve">
+    <value>Алгебра</value>
+  </data>
   <data name="Answer" xml:space="preserve">
-    <value>Ответить</value>
+    <value>Ответ</value>
   </data>
-  <data name="Author" xml:space="preserve">
-    <value>Автор</value>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Удалить</value>
+  <data name="Geometry" xml:space="preserve">
+    <value>Геометрия</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Редактировать</value>
+  <data name="Image File" xml:space="preserve">
+    <value>Изображение</value>
   </data>
-  <data name="Task Solved" xml:space="preserve">
-    <value>Задача решена</value>
+  <data name="Programming" xml:space="preserve">
+    <value>Программирование</value>
   </data>
-  <data name="Wrong Answer" xml:space="preserve">
-    <value>Задача не решена</value>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
   </data>
-  <data name="Your answer" xml:space="preserve">
-    <value>Ваш ответ</value>
+  <data name="Subject" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Условие</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Заголовок</value>
   </data>
 </root>
